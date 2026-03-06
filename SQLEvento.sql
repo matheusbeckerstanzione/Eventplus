@@ -1,0 +1,60 @@
+CREATE DATABASE EventPlus;
+
+USE EventPlus;
+
+CREATE TABLE TipoUsuario(
+	IdTipoUsuario UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),
+	Titulo NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE TipoEvento(
+	IdTipoEvento UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),			
+	Titulo NVARCHAR(100) NOT NULL			
+);
+
+CREATE TABLE Instituicao(
+	IdInstituicao UNIQUEIDENTIFIER PRIMARY KEY	DEFAULT ((NEWID())),			
+	NomeFantasia NVARCHAR(100),													
+	Endereco NVARCHAR(100),													
+	CNPJ  NVARCHAR(14) NOT NULL	UNIQUE															
+);
+
+CREATE TABLE Usuario(
+	IdUsuario UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),			
+	Nome NVARCHAR(100)NOT NULL ,													
+	Email NVARCHAR(150) NOT NULL UNIQUE,													
+	Senha NVARCHAR(255)	NOT NULL												
+);
+
+CREATE TABLE Evento(
+	IdEvento UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),			
+	Nome NVARCHAR(100) NOT NULL,													
+	DataEvento DATETIME NOT NULL,															
+	Descricao TEXT NOT NULL,
+	
+	IdTipoEvento UNIQUEIDENTIFIER FOREIGN KEY REFERENCES TipoEvento(IdTipoEvento),
+
+	IdInstituicao UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Instituicao (IdInstituicao)
+);
+
+
+CREATE TABLE Presenca(
+	IdPresenca UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),			
+	Situicao BIT NOT NULL,
+	IdEvento UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Evento(IdEvento),
+	IdUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(IdUsuario)
+	
+);
+
+
+CREATE TABLE ComentarioEvento(
+	IdComentarioEvento	UNIQUEIDENTIFIER PRIMARY KEY DEFAULT ((NEWID())),			
+	Descricao NVARCHAR(500),													
+	DataComentario DATETIME NOT NULL,															
+	Exibe BIT NOT NULL,
+	
+	IdEvento UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Evento(IdEvento),
+	IdUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(IdUsuario)
+
+);
+
