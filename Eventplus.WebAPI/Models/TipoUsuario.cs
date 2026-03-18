@@ -10,8 +10,12 @@ namespace Eventplus.WebAPI.Models;
 public partial class TipoUsuario
 {
     [Key]
-    public Guid IdTipoUsuario { get; set; }
+    [Column("IDTipoUsuario")]
+    public Guid IdtipoUsuario { get; set; }
 
     [StringLength(50)]
     public string Titulo { get; set; } = null!;
+
+    [InverseProperty("IdtipoUsuarioNavigation")]
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }

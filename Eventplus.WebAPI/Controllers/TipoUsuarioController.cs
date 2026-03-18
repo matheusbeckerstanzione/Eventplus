@@ -23,7 +23,7 @@ public class TipoUsuarioController : ControllerBase
     /// </summary>
     /// <returns>eleretorna um statos code 200 e alista de tipo de eventos</returns>
     [HttpGet]
-    public IActionResult Listar(Guid Id)
+    public IActionResult Listar()
     {
         try
         {

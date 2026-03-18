@@ -1,4 +1,4 @@
-﻿using Eventplus.WebAPI.BdContextEvent;
+﻿using Eventplus.WebAPI.DbContextEvent;
 using Eventplus.WebAPI.Interface;
 using Eventplus.WebAPI.Models;
 

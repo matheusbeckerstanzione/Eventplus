@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventplus.WebAPI.Models;
@@ -11,7 +10,8 @@ namespace Eventplus.WebAPI.Models;
 public partial class Evento
 {
     [Key]
-    public Guid IdEvento { get; set; }
+    [Column("IDEvento")]
+    public Guid Idevento { get; set; }
 
     [StringLength(100)]
     public string Nome { get; set; } = null!;
@@ -22,23 +22,23 @@ public partial class Evento
     [Column(TypeName = "text")]
     public string Descricao { get; set; } = null!;
 
-    public Guid? IdTipoEvento { get; set; }
+    [Column("IDTipoEvento")]
+    public Guid? IdtipoEvento { get; set; }
 
-    public Guid? IdInstituicao { get; set; }
+    [Column("IDInstituicao")]
+    public Guid? Idinstituicao { get; set; }
 
-    [JsonIgnore]
-    [InverseProperty("IdEventoNavigation")]
+    [InverseProperty("IdeventoNavigation")]
     public virtual ICollection<ComentarioEvento> ComentarioEventos { get; set; } = new List<ComentarioEvento>();
 
-    [ForeignKey("IdInstituicao")]
+    [ForeignKey("Idinstituicao")]
     [InverseProperty("Eventos")]
-    public virtual Instituicao? IdInstituicaoNavigation { get; set; }
+    public virtual Instituicao? IdinstituicaoNavigation { get; set; }
 
-    [ForeignKey("IdTipoEvento")]
+    [ForeignKey("IdtipoEvento")]
     [InverseProperty("Eventos")]
-    public virtual TipoEvento? IdTipoEventoNavigation { get; set; }
+    public virtual TipoEvento? IdtipoEventoNavigation { get; set; }
 
-    [JsonIgnore]
-    [InverseProperty("IdEventoNavigation")]
+    [InverseProperty("IdeventoNavigation")]
     public virtual ICollection<Presenca> Presencas { get; set; } = new List<Presenca>();
 }

@@ -12,7 +12,7 @@ public interface IEventoRepository
 
     List<Evento> ListarPorId(Guid IdUsuario);
 
-    List<Evento> ListProximos(Guid IdUsuario);
+    List<Evento> ListProximos();
     Evento BuscarPorId(Guid Id);
 
     void Atualizar(Guid id, Evento Evento);

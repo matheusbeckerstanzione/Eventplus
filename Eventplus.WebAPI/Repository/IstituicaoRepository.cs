@@ -1,4 +1,4 @@
-﻿using Eventplus.WebAPI.BdContextEvent;
+﻿using Eventplus.WebAPI.DbContextEvent;
 using Eventplus.WebAPI.Interface;
 using Eventplus.WebAPI.Models;
 
@@ -54,6 +54,6 @@ public class IstituicaoRepository : IInstituicaoRepository
 
     public List<Instituicao> Listar()
     {
-        return _context.Instituicaos.OrderBy(Instituicao => Instituicao.IdInstituicao).ToList();
+        return _context.Instituicaos.OrderBy(Instituicao => Instituicao.Idinstituicao).ToList();
     }
 }

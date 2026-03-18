@@ -10,25 +10,28 @@ namespace Eventplus.WebAPI.Models;
 public partial class ComentarioEvento
 {
     [Key]
-    public Guid IdComentarioEvento { get; set; }
+    [Column("IDComentarioEvento")]
+    public Guid IdcomentarioEvento { get; set; }
 
-    [StringLength(500)]
-    public string? Descricao { get; set; }
+    [StringLength(200)]
+    public string Descricao { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
     public DateTime DataComentario { get; set; }
 
     public bool Exibe { get; set; }
 
-    public Guid? IdEvento { get; set; }
+    [Column("IDEvento")]
+    public Guid? Idevento { get; set; }
 
-    public Guid? IdUsuario { get; set; }
+    [Column("IDUsuario")]
+    public Guid? Idusuario { get; set; }
 
-    [ForeignKey("IdEvento")]
+    [ForeignKey("Idevento")]
     [InverseProperty("ComentarioEventos")]
-    public virtual Evento? IdEventoNavigation { get; set; }
+    public virtual Evento? IdeventoNavigation { get; set; }
 
-    [ForeignKey("IdUsuario")]
+    [ForeignKey("Idusuario")]
     [InverseProperty("ComentarioEventos")]
-    public virtual Usuario? IdUsuarioNavigation { get; set; }
+    public virtual Usuario? IdusuarioNavigation { get; set; }
 }

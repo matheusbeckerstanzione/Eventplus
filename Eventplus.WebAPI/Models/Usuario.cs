@@ -1,33 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eventplus.WebAPI.Models;
 
 [Table("Usuario")]
-[Index("Email", Name = "UQ__Usuario__A9D10534CD13BA2F", IsUnique = true)]
+[Index("Email", Name = "UQ__Usuario__A9D1053451DF30D1", IsUnique = true)]
 public partial class Usuario
 {
     [Key]
-    public Guid IdUsuario { get; set; }
+    [Column("IDUsuario")]
+    public Guid Idusuario { get; set; }
 
     [StringLength(100)]
     public string Nome { get; set; } = null!;
 
-    [StringLength(150)]
+    [StringLength(256)]
     public string Email { get; set; } = null!;
 
-    [StringLength(255)]
+    [StringLength(60)]
     public string Senha { get; set; } = null!;
 
-    [JsonIgnore]
-    [InverseProperty("IdUsuarioNavigation")]
+    [Column("IDTipoUsuario")]
+    public Guid? IdtipoUsuario { get; set; }
+
+    [InverseProperty("IdusuarioNavigation")]
     public virtual ICollection<ComentarioEvento> ComentarioEventos { get; set; } = new List<ComentarioEvento>();
 
-    [JsonIgnore]
-    [InverseProperty("IdUsuarioNavigation")]
+    [ForeignKey("IdtipoUsuario")]
+    [InverseProperty("Usuarios")]
+    public virtual TipoUsuario? IdtipoUsuarioNavigation { get; set; }
+
+    [InverseProperty("IdusuarioNavigation")]
     public virtual ICollection<Presenca> Presencas { get; set; } = new List<Presenca>();
 }
