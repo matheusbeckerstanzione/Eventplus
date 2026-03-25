@@ -3,6 +3,7 @@ using Azure.AI.ContentSafety;
 using Eventplus.WebAPI.DTO;
 using Eventplus.WebAPI.Interface;
 using Eventplus.WebAPI.Models;
+using Eventplus.WebAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +60,63 @@ public class ComentarioEventoController : ControllerBase
         {
 
             return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    public IActionResult List(Guid Id)
+    {
+        try
+        {
+            return Ok(_comentarioEventRepository.List(Id));
+        }
+        catch (Exception erro)
+        {
+
+            return BadRequest(erro.Message);
+        }
+    }
+
+    [HttpGet("Exibir")]
+    public IActionResult ListarSomenteExibe(Guid Id)
+    {
+        try
+        {
+            return Ok(_comentarioEventRepository.ListarSomenteExibe(Id));
+        }
+        catch (Exception erro)
+        {
+
+            return BadRequest(erro.Message);
+        }
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult BuscarPorIdUsuario(Guid Idusuario, Guid Idevento)
+    {
+        try
+        {
+            return Ok(_comentarioEventRepository.BuscarPorIdUsuario(Idusuario,Idevento));
+        }
+        catch (Exception erro)
+        {
+            return BadRequest(erro.Message);
+
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(Guid id)
+    {
+        try
+        {
+            _comentarioEventRepository.Deletar(id);
+            return NoContent();
+        }
+        catch (Exception erro)
+        {
+
+            return BadRequest(erro.Message);
         }
     }
 }
