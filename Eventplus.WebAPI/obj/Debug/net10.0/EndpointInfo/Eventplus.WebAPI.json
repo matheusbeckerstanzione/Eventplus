@@ -15,6 +15,37 @@
     "version": "v1"
   },
   "paths": {
+    "/api/ComentarioEvento": {
+      "post": {
+        "tags": [
+          "ComentarioEvento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComentarioEventoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComentarioEventoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComentarioEventoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Evento/Usuario/{idUsuario}": {
       "get": {
         "tags": [
@@ -765,6 +796,24 @@
   },
   "components": {
     "schemas": {
+      "ComentarioEventoDTO": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "idusuario": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "idevento": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
       "EventoDTO": {
         "required": [
           "dataEvento",
@@ -884,10 +933,6 @@
           "senha": {
             "minLength": 1,
             "type": "string"
-          },
-          "idTipoUsuario": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -908,6 +953,9 @@
     }
   ],
   "tags": [
+    {
+      "name": "ComentarioEvento"
+    },
     {
       "name": "Evento"
     },

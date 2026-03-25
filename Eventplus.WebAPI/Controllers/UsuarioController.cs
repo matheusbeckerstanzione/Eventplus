@@ -52,7 +52,7 @@ public class UsuarioController : ControllerBase
                 Nome = usuario.Nome,
                 Senha = usuario.Senha,
                 Email = usuario.Email,
-                IdtipoUsuario = usuario.IdTipoUsuario
+               
             };
             _usuarioRepository.Cadastrar(novoUsuario);
             return StatusCode(201, novoUsuario);

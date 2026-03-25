@@ -13,6 +13,6 @@ public class UsuarioDTO
     [Required(ErrorMessage = "A senha do usuario e obrigatorio")]
     public string? Senha { get; set;}
 
-    public Guid IdTipoUsuario { get; set; }
+  
 
 }
